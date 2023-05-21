@@ -6,12 +6,14 @@ from django.contrib.auth.models import User
 class Table(models.Model):
     table_number = models.IntegerField()
     max_no_guests = models.IntegerField()
+    booked = models.BooleanField(default=False)
 
     def __str__(self):
         return f'Table {self.table_number}, max guests {self.max_no_guests}'
 
 
 class Booking(models.Model):
+    # times
     booking_id = models.UUIDField(
         primary_key=True, default=uuid.uuid4, editable=False)
     booked_by = models.ForeignKey(
