@@ -1,6 +1,6 @@
 from django.shortcuts import render, reverse, redirect
 from django.views import generic, View
-
+from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from .models import Booking
 from .forms import BookingForm
