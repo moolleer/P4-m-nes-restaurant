@@ -1,5 +1,6 @@
-from django.shortcuts import render
+from django.shortcuts import render, reverse, redirect
 from django.views import generic, View
+
 from django.contrib import messages
 from .models import Booking
 from .forms import BookingForm
@@ -29,3 +30,5 @@ def add_booking(request):
     context = {
         'form': form
     }
+
+    return render(request, template, context)
