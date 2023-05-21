@@ -5,6 +5,11 @@ from .models import Booking
 from .forms import BookingForm
 
 
+class Home(generic.TemplateView):
+    """Opens to landing page"""
+    template_name = "index.html"
+
+
 def add_booking(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
