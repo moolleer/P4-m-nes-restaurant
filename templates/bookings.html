@@ -4,7 +4,7 @@
 
 <p>Some booking content</p>
 
-<form method="POST" action="add">
+<form method="POST" action="{% url 'bookings' %}">
     {% csrf_token %}
     {{ form.as_p}}
     <input class="btn submit" type="submit" value="Book Now">

@@ -11,11 +11,31 @@ class Home(generic.TemplateView):
     template_name = "index.html"
 
 
+class AboutUs(generic.TemplateView):
+    """Opens to About us page"""
+    template_name = "about_us.html"
+
+
+class Menu(generic.TemplateView):
+    """Opens to Menu us page"""
+    template_name = "menu.html"
+
+
+class ShowMyBookings(generic.ListView):
+    """Show the users bookings"""
+    model = Booking
+    template_name = 'my_bookings.html'
+    paginate_by = 6
+
+    def get_queryset(self):
+        return Booking.objects.filter(booked_by=self.request.user)
+
+
 def add_booking(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            form.instance.user = request.user
+            form.instance.booked_by = request.user
             form.save()
             messages.success(request, 'Booking completed')
             return redirect(reverse('my_bookings'))

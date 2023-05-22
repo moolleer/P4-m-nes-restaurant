@@ -2,6 +2,21 @@
 
 {% block content %}
 
-<p>My bookings</p>
+<div class="container">
+    <h1>My Bookings</h1>
+    <div class="row">
+      {% for booking in booking_list %}
+        <div class="col-md-4">
+          <div class="card mb-4">
+            <div class="card-body">
+              <h5 class="card-title">Booking:</h5>
+              <p class="card-text">Date: {{ booking.date }}</p>
+              <p class="card-text">Time: {{ booking.time }}</p>
+              <p class="card-text">Persons: {{ booking.no_of_guests }}</p>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
 
 {%endblock%}
