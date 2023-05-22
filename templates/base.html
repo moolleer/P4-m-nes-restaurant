@@ -31,9 +31,9 @@
     <header>
         <!-- Navigation -->
         <nav class="navbar navbar-expand-lg navbar-light">
-            <div class="container-fluid">
+            <div class="container">
                 <a class="navbar-brand" href="{% url 'home' %}">
-                    <img src="https://res.cloudinary.com/dq785n55j/image/upload/v1684740328/logo_zz3ma8.png" width="300"
+                    <img src="https://res.cloudinary.com/dq785n55j/image/upload/v1684756312/logo_transparent_knaope.png" width="300"
                         height="300" class="d-inline-block align-top" alt="restaurant-logo">
                 </a>
 
@@ -42,7 +42,7 @@
                     aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
                 </button>
-                <div class="collapse navbar-collapse" id="navbarContent">
+                <div class="collapse navbar-collapse justify-content-end" id="navbarContent">
                     <ul class="navbar-nav mb-2 mb-lg-0">
                         <li class="nav-item">
                             <a class="nav-link" aria-current="page" href="{% url 'home' %}">Home</a>
@@ -54,6 +54,9 @@
                             <a class="nav-link" aria-current="page" href="{% url 'menu' %}">Menu</a>
                         </li>
                         {% if user.is_authenticated %}
+                        <li class="nav-item">
+                            <a class="nav-link" href="{% url 'my_bookings' %}">My bookings</a>
+                        </li>
                         <li class="nav-item">
                             <a class="nav-link" href="{% url 'account_logout' %}">Logout</a>
                         </li>
@@ -71,7 +74,6 @@
         </nav>
     </header>
 
-    <p>Startsida</p>
 
     <div>
         {% block content %}
