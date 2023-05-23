@@ -1,4 +1,4 @@
-from django.shortcuts import render, reverse, redirect
+from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.views import generic, View
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
@@ -17,8 +17,13 @@ class AboutUs(generic.TemplateView):
 
 
 class Menu(generic.TemplateView):
-    """Opens to Menu us page"""
+    """Opens to Menu page"""
     template_name = "menu.html"
+
+
+class DeleteBooking(generic.TemplateView):
+    """Opens Delete a booking page"""
+    template_name = "delete_a_booking.html"
 
 
 class ShowMyBookings(generic.ListView):
@@ -32,6 +37,9 @@ class ShowMyBookings(generic.ListView):
 
 
 def add_booking(request):
+    """
+    
+    """
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
@@ -76,22 +84,33 @@ def add_booking(request):
     return render(request, template, context)
 
 
-# def tables(requested_date, requested_time, no_of_guests):
-#     table_list = []
-#     all_tables = Table.objects.all()
-#     for table in all_tables:
-#         if table.date :
-#             table.booked = True
-#         else:
-#             table_list.append(table.table_number)
-#     print(table_list)
-#     return table_list
-
-
 def check_available_tables(date, time, no_of_guests):
+    """
+
+    """
     available_tables = Table.objects.filter(
         booked=False, max_no_guests__gte=no_of_guests)
 
     for table in available_tables:
         print(table)
     return available_tables
+
+
+def delete_booking(request, booking_id):
+    """
+
+    """
+    booking = get_object_or_404(Booking, booking_id=booking_id)
+    print(booking_id)
+    if request.method == "POST":
+        booking.delete()
+        messages.success(request, 'Your booking has been deleted!')
+        return redirect(reverse('my_bookings'))
+
+    template = 'delete_a_booking.html'
+    context = {
+        'booking': booking,
+    }
+
+    return render(request, template, context)
+    

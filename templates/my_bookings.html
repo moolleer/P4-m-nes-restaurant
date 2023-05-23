@@ -3,7 +3,8 @@
 {% block content %}
 
 <div class="container">
-    <h1>My Bookings</h1>
+    <h2>My Bookings</h2>
+    <br>
     <div class="row">
       {% for booking in booking_list %}
         <div class="col-md-4">
@@ -13,6 +14,8 @@
               <p class="card-text">Date: {{ booking.date }}</p>
               <p class="card-text">Time: {{ booking.time }}</p>
               <p class="card-text">Persons: {{ booking.no_of_guests }}</p>
+              <a href="#" class="btn btn-my-bookings">Update Booking</a>
+              <a href="{% url 'delete_booking' booking.booking_id %}" class="btn btn-my-bookings">Delete Booking</a>
             </div>
           </div>
         </div>

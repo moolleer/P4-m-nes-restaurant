@@ -1,44 +1,49 @@
-
-
 body {
-    background-color: #FFE9CF;
-    color: #933D00;
+  background-color: #FFE9CF;
+  color: #933D00;
 }
 
 /* Navbar*/
 
 .navbar-nav .nav-link {
-    color: #933D00 !important;
-    font-size: 18px;
-    font-weight: 500;
-    
+  color: #933D00 !important;
+  font-size: 18px;
+  font-weight: 500;
+
 }
 
 .nav-link {
-    position: relative;
+  position: relative;
 }
 
 .nav-link:after,
 .nav-link:before {
   transition: all .5s;
-} 
+}
+
 .nav-link:hover {
   color: #510000 !important;
 }
 
 .nav-link:after {
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    margin: auto;
-    width: 0%;
-    content: '.';
-    color: transparent;
-    background: #510000;
-    height: 1px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  width: 0%;
+  content: '.';
+  color: transparent;
+  background: #510000;
+  height: 1px;
 }
 
 .nav-link:hover:after {
-    width: 60%;
-  } 
+  width: 60%;
+}
+
+/* Cards */
+.btn-my-bookings {
+  background-color: #510000 !important;
+  color: white;
+}
