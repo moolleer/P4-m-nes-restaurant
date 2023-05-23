@@ -1,6 +1,24 @@
 body {
-  background-color: #FFE9CF;
+  background-color: #ffe9cf;
   color: #933D00;
+}
+
+/* Hero Image*/
+
+.hero-image {
+  position: relative;
+  height: 100vh;
+  overflow: hidden;
+
+  background-size: cover;
+}
+.opaque-overlay {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.5);
 }
 
 /* Navbar*/
