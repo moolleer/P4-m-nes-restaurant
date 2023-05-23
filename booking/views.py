@@ -60,7 +60,7 @@ def add_booking(request):
                     messages.error(
                         request, 'No more available tables for this day and time.')
                     print('no more available tables')
-            return redirect(reverse('my_bookings'))
+            return redirect(reverse('bookings'))
         else:
             messages.error(
                 request,

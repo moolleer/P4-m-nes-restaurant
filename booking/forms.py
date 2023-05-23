@@ -25,4 +25,5 @@ class BookingForm(forms.ModelForm):
             choices=BOOKING_TIMES), 'no_of_guests': forms.Select(
                 choices=NO_OF_GUESTS_CHOICE), 'date': forms.DateInput(
                 attrs={'type': 'date', 'placeholder': 'yyyy-mm-dd (DOB)'}),
-                'message': forms.Textarea(attrs={'placeholder': 'Write your message here..'})}       
+                'message': forms.Textarea(attrs={
+                    'placeholder': 'Write your message here..'})}
