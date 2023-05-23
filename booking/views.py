@@ -2,7 +2,7 @@ from django.shortcuts import render, reverse, redirect
 from django.views import generic, View
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
-from .models import Booking
+from .models import Booking, Table
 from .forms import BookingForm
 
 
@@ -35,9 +35,31 @@ def add_booking(request):
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            form.instance.booked_by = request.user
-            form.save()
-            messages.success(request, 'Booking completed')
+            booking_date = form.cleaned_data['date']
+            booking_time = form.cleaned_data['time']
+            print(booking_date)
+            existing_bookings = Booking.objects.filter(
+                date=booking_date, time=booking_time)
+            for booking in existing_bookings:
+                print(booking)
+            if existing_bookings.exists():
+                messages.error(
+                    request, 'A booking already exists for this day and time.')
+                print('booking exists')
+            else:
+                available_tables = check_available_tables(
+                    booking_date, booking_time, form.cleaned_data[
+                        'no_of_guests'])
+                print(available_tables)
+                print('Hej')
+                if available_tables:
+                    form.instance.booked_by = request.user
+                    form.save()
+                    messages.success(request, 'Booking completed')
+                else:
+                    messages.error(
+                        request, 'No more available tables for this day and time.')
+                    print('no more available tables')
             return redirect(reverse('my_bookings'))
         else:
             messages.error(
@@ -52,3 +74,24 @@ def add_booking(request):
     }
 
     return render(request, template, context)
+
+
+# def tables(requested_date, requested_time, no_of_guests):
+#     table_list = []
+#     all_tables = Table.objects.all()
+#     for table in all_tables:
+#         if table.date :
+#             table.booked = True
+#         else:
+#             table_list.append(table.table_number)
+#     print(table_list)
+#     return table_list
+
+
+def check_available_tables(date, time, no_of_guests):
+    available_tables = Table.objects.filter(
+        booked=False, max_no_guests__gte=no_of_guests)
+
+    for table in available_tables:
+        print(table)
+    return available_tables
