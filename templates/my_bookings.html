@@ -14,7 +14,7 @@
               <p class="card-text">Date: {{ booking.date }}</p>
               <p class="card-text">Time: {{ booking.time }}</p>
               <p class="card-text">Persons: {{ booking.no_of_guests }}</p>
-              <a href="#" class="btn btn-my-bookings">Update Booking</a>
+              <a href="{% url 'edit_booking' booking.booking_id %}" class="btn btn-my-bookings">Edit Booking</a>
               <a href="{% url 'delete_booking' booking.booking_id %}" class="btn btn-my-bookings">Delete Booking</a>
             </div>
           </div>

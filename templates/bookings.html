@@ -1,16 +1,20 @@
 {% extends "base.html" %}
 
 {% block content %}
-<section class="container">
-<h2>Book Your Table</h2>
-<br>
-<p>If you are a group bigger than 6 persons, please contact us for booking. </p>
 
-<form method="POST" action="{% url 'bookings' %}">
-    {% csrf_token %}
-    {{ form.as_p}}
-    <input class="btn submit" type="submit" value="Book Now">
-</form>
+<!-- {% load crispy_forms_tags %} -->
+
+<section class="container">
+    <h2>Book Your Table</h2>
+    <br>
+    <p>If you are a group bigger than 6 persons, please contact us for booking. </p>
+
+    <form method="POST" action="{% url 'bookings' %}">
+        
+        {% csrf_token %}
+        {{ form.as_p }}
+        <input class="btn" type="submit" value="Book Now">
+    </form>
 </section>
 
 {%endblock%}

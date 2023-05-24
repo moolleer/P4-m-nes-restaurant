@@ -11,15 +11,15 @@
                 <h2>Delete Booking</h2>
                 <br>
                 <p>You are about to delete your booking for:</p>
-                <p>{{ booking.date }} & {{ booking.booking_id }}</p>
+                <p>{{ booking.date }}</p>
                 <p>Time: {{ booking.time }}</p>
                 <br>
                 <p>Do you wish to continue?</p>
-                <p>This action cannot be undone.</p>
+                <p><strong>This action cannot be undone.</strong></p>
                 <form action="{% url 'delete_booking' booking.booking_id %}" method="POST">
                     {% csrf_token %}
                     <div class="text-center mt-3">
-                    <a href="{% url 'my_bookings' %}" class="btn font-weight-bold cancel-submit">Cancel</a>
+                    <a href="{% url 'my_bookings' %}" class="btn btn-info font-weight-bold cancel-submit mt-3">Cancel</a>
                     <button class="btn btn-info font-weight-bold submit mt-3">Delete Booking</button>
                 </div>
                 </form> 

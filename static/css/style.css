@@ -3,6 +3,11 @@ body {
   color: #933D00;
 }
 
+.btn {
+  background-color: #510000 !important;
+  color: white;
+}
+
 /* Hero Image*/
 
 .hero-image {
@@ -60,8 +65,3 @@ body {
   width: 60%;
 }
 
-/* Cards */
-.btn-my-bookings {
-  background-color: #510000 !important;
-  color: white;
-}

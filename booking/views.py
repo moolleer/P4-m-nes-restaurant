@@ -30,7 +30,6 @@ class ShowMyBookings(generic.ListView):
     """Show the users bookings"""
     model = Booking
     template_name = 'my_bookings.html'
-    paginate_by = 6
 
     def get_queryset(self):
         return Booking.objects.filter(booked_by=self.request.user)
@@ -38,41 +37,26 @@ class ShowMyBookings(generic.ListView):
 
 def add_booking(request):
     """
-    
+    Allows a user to make a booking, and checks
+    if a table is available for the amount of guests,
+    and requested day and time.
     """
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
-            booking_date = form.cleaned_data['date']
-            booking_time = form.cleaned_data['time']
-            print(booking_date)
-            existing_bookings = Booking.objects.filter(
-                date=booking_date, time=booking_time)
-            for booking in existing_bookings:
-                print(booking)
-            if existing_bookings.exists():
-                messages.error(
-                    request, 'A booking already exists for this day and time.')
-                print('booking exists')
+            booking = form.save(commit=False)
+            booking.booked_by = request.user
+
+            if booking.assign_table():
+                booking.save()
+                messages.success(request, 'Booking completed')
+                return redirect(reverse('my_bookings'))
             else:
-                available_tables = check_available_tables(
-                    booking_date, booking_time, form.cleaned_data[
-                        'no_of_guests'])
-                print(available_tables)
-                print('Hej')
-                if available_tables:
-                    form.instance.booked_by = request.user
-                    form.save()
-                    messages.success(request, 'Booking completed')
-                else:
-                    messages.error(
-                        request, 'No more available tables for this day and time.')
-                    print('no more available tables')
-            return redirect(reverse('bookings'))
+                messages.error(
+                    request, 'No more available tables for this day and time.')
         else:
             messages.error(
-                request,
-                'An error occurred, please try again')
+                request, 'An error occurred, please try again')
     else:
         form = BookingForm()
 
@@ -82,18 +66,6 @@ def add_booking(request):
     }
 
     return render(request, template, context)
-
-
-def check_available_tables(date, time, no_of_guests):
-    """
-
-    """
-    available_tables = Table.objects.filter(
-        booked=False, max_no_guests__gte=no_of_guests)
-
-    for table in available_tables:
-        print(table)
-    return available_tables
 
 
 def delete_booking(request, booking_id):
@@ -113,4 +85,3 @@ def delete_booking(request, booking_id):
     }
 
     return render(request, template, context)
-    
