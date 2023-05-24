@@ -41,6 +41,7 @@ def add_booking(request):
     if a table is available for the amount of guests,
     and requested day and time.
     """
+
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
@@ -70,10 +71,14 @@ def add_booking(request):
 
 def delete_booking(request, booking_id):
     """
-
+    Users can choose to delete a booking. The delete booking
+    page give the users information that this cant be undone,
+    and if they chose cancel they will be redirected back to my bookings.
+    If they click on the delete button the booking will be
+    deleted permanently.
     """
     booking = get_object_or_404(Booking, booking_id=booking_id)
-    print(booking_id)
+
     if request.method == "POST":
         booking.delete()
         messages.success(request, 'Your booking has been deleted!')
@@ -82,6 +87,30 @@ def delete_booking(request, booking_id):
     template = 'delete_a_booking.html'
     context = {
         'booking': booking,
+    }
+
+    return render(request, template, context)
+
+
+def edit_booking(request, booking_id):
+    """
+
+    """
+    booking = get_object_or_404(Booking, booking_id=booking_id)
+
+    if request.method == 'POST':
+        form = BookingForm(request.POST, instance=booking)
+        if form.is_valid():
+            form.save()
+            messages.success(request, 'Your booking has been updated')
+
+            return redirect('my_bookings')
+    else:
+        form = BookingForm(instance=booking)
+
+    template = 'edit_booking.html'
+    context = {
+        'form': form,
     }
 
     return render(request, template, context)
