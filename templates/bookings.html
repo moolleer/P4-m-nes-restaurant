@@ -16,7 +16,7 @@
 
             <p>If you are a group bigger than 6 persons, please contact us for booking. </p>
 
-            <form class="booking-form" method="POST" action="{% url 'bookings' %}">
+            <form class="form" method="POST" action="{% url 'bookings' %}">
 
                 {% csrf_token %}
                 {{ form.as_p }}
