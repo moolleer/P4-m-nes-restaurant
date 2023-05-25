@@ -11,8 +11,8 @@
         
         {% csrf_token %}
         {{ form.as_p }}
-        <a href="{% url 'my_bookings' %}" class="btn cancel-submit">Cancel</a>
         <input class="btn" type="submit" value="Edit Booking">
+        <a href="{% url 'my_bookings' %}" class="btn cancel-submit">Cancel</a>
 
     </form>
 </section>

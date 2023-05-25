@@ -7,22 +7,22 @@ from .forms import BookingForm
 
 
 class Home(generic.TemplateView):
-    """Opens to landing page"""
+    """Open landing page"""
     template_name = "index.html"
 
 
 class AboutUs(generic.TemplateView):
-    """Opens to About us page"""
+    """Open About us page"""
     template_name = "about_us.html"
 
 
 class Menu(generic.TemplateView):
-    """Opens to Menu page"""
+    """Open Menu page"""
     template_name = "menu.html"
 
 
 class DeleteBooking(generic.TemplateView):
-    """Opens Delete a booking page"""
+    """Open Delete a booking page"""
     template_name = "delete_a_booking.html"
 
 
@@ -39,22 +39,36 @@ def add_booking(request):
     """
     Allows a user to make a booking, and checks
     if a table is available for the amount of guests,
-    and requested day and time.
+    and requested day and time. Also prevent users
+    from making more than one booking on the same day.
     """
 
     if request.method == 'POST':
         form = BookingForm(request.POST)
         if form.is_valid():
+            booking_date = form.cleaned_data['date']
+            booking_time = form.cleaned_data['time']
+            existing_booking = Booking.objects.filter(
+                    date=booking_date, time=booking_time)
+
             booking = form.save(commit=False)
             booking.booked_by = request.user
 
-            if booking.assign_table():
-                booking.save()
-                messages.success(request, 'Booking completed')
-                return redirect(reverse('my_bookings'))
-            else:
-                messages.error(
-                    request, 'No more available tables for this day and time.')
+            if booking.booked_by == request.user:
+                # Prevent a user for doing more than one booking/day
+                if existing_booking.exists():
+                    messages.error(
+                        request, 'This booking already exists. Please change time or day.')
+
+                # Check if any available tables
+                elif booking.assign_table():
+                    booking.save()
+                    messages.success(request, 'Booking completed')
+                    return redirect(reverse('my_bookings'))
+
+                else:
+                    messages.error(
+                        request, 'No more available tables for this day and time.')
         else:
             messages.error(
                 request, 'An error occurred, please try again')
@@ -94,6 +108,7 @@ def delete_booking(request, booking_id):
 
 def edit_booking(request, booking_id):
     """
+    Users can edit their bookings time and date,
 
     """
     booking = get_object_or_404(Booking, booking_id=booking_id)
