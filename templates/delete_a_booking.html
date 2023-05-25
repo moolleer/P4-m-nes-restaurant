@@ -19,8 +19,8 @@
                 <form action="{% url 'delete_booking' booking.booking_id %}" method="POST">
                     {% csrf_token %}
                     <div class="text-center mt-3">
-                    <a href="{% url 'my_bookings' %}" class="btn btn-info font-weight-bold cancel-submit mt-3">Cancel</a>
-                    <button class="btn btn-info font-weight-bold submit mt-3">Delete Booking</button>
+                    <a href="{% url 'my_bookings' %}" class="btn cancel-submit mt-3">Cancel</a>
+                    <button class="btn submit mt-3">Delete Booking</button>
                 </div>
                 </form> 
             </div>

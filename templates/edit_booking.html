@@ -6,13 +6,14 @@
     <h2>Edit Booking</h2>
     <br>
     <p>If you are a group bigger than 6 persons, please contact us for booking. </p>
-    <p>{{ booking }}</p>
 
     <form method="POST"  >
         
         {% csrf_token %}
         {{ form.as_p }}
-        <input class="btn" type="submit" value="Book Now">
+        <a href="{% url 'my_bookings' %}" class="btn cancel-submit">Cancel</a>
+        <input class="btn" type="submit" value="Edit Booking">
+
     </form>
 </section>
 

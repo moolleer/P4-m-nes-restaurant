@@ -101,10 +101,15 @@ def edit_booking(request, booking_id):
     if request.method == 'POST':
         form = BookingForm(request.POST, instance=booking)
         if form.is_valid():
-            form.save()
-            messages.success(request, 'Your booking has been updated')
+            booking = form.save(commit=False)
 
-            return redirect('my_bookings')
+            if booking.assign_table():
+                booking.save()
+                messages.success(request, 'Your booking has been updated')
+                return redirect('my_bookings')
+            else:
+                messages.error(
+                    request, 'No more available tables for this day and time.')
     else:
         form = BookingForm(instance=booking)
 
