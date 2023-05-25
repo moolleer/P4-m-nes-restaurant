@@ -1,21 +1,31 @@
 body {
-  background-color: #ffe9cf;
+  background-color: white;
   color: #933D00;
 }
 
 .btn {
-  background-color: #510000 !important;
+  background-color: #6d0000 !important;
   color: white;
 }
 
 /* Hero Image*/
 
+
+.hero-content {
+  padding: 0px;
+}
+
+.hero-text {
+  top: 60%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  
+  text-align: center;
+  color: white;
+}
+
 .hero-image {
   position: relative;
-  height: 100vh;
-  overflow: hidden;
-
-  background-size: cover;
 }
 .opaque-overlay {
   position: absolute;
@@ -65,3 +75,6 @@ body {
   width: 60%;
 }
 
+.page-break {
+  border-top: 2px #510000 solid;
+}

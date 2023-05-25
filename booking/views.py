@@ -56,12 +56,12 @@ def add_booking(request):
 
             if booking.booked_by == request.user:
                 # Prevent a user for doing more than one booking/day
-                if existing_booking.exists():
-                    messages.error(
-                        request, 'This booking already exists. Please change time or day.')
+                # if existing_booking.exists():
+                #     messages.error(
+                #         request, 'This booking already exists. Please change time or day.')
 
                 # Check if any available tables
-                elif booking.assign_table():
+                if booking.assign_table():
                     booking.save()
                     messages.success(request, 'Booking completed')
                     return redirect(reverse('my_bookings'))
