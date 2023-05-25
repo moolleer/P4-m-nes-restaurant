@@ -1,20 +1,34 @@
 {% extends "base.html" %}
 
+
+
 {% block content %}
 
-<!-- {% load crispy_forms_tags %} -->
 
-<section class="container">
+<section class="container text-center p-2">
     <h2>Book Your Table</h2>
     <br>
-    <p>If you are a group bigger than 6 persons, please contact us for booking. </p>
+    
+    {% if user.is_authenticated %}
+    <div class="row justify-content-center">
+        <div class="col-12 col-md-9 col-lg-6 mb-3">
+            
 
-    <form method="POST" action="{% url 'bookings' %}">
-        
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input class="btn" type="submit" value="Book Now">
-    </form>
+            <p>If you are a group bigger than 6 persons, please contact us for booking. </p>
+
+            <form class="booking-form" method="POST" action="{% url 'bookings' %}">
+
+                {% csrf_token %}
+                {{ form.as_p }}
+                <input class="btn" type="submit" value="Book Now">
+            </form>
+            {% else %}
+            <p>To make a booking please <a href="{% url 'account_signup' %}"><strong>Sign up</strong></a> or<a href="{% url 'account_login' %}">
+                <strong>Log in</strong></a> to your account.</p>
+            
+            {% endif %}
+        </div>
+    </div>
 </section>
 
-{%endblock%}
+{% endblock %}

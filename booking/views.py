@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from .models import Booking, Table
-from .forms import BookingForm, NewUserForm
+from .forms import BookingForm
 
 
 class Home(generic.TemplateView):
