@@ -3,7 +3,7 @@ from django.views import generic, View
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
 from .models import Booking, Table
-from .forms import BookingForm
+from .forms import BookingForm, NewUserForm
 
 
 class Home(generic.TemplateView):
@@ -33,6 +33,31 @@ class ShowMyBookings(generic.ListView):
 
     def get_queryset(self):
         return Booking.objects.filter(booked_by=self.request.user)
+
+
+def signUp(request):
+    if request.method == 'POST':
+        form = NewUserForm(request.POST)
+
+        if form.is_valid():
+            user = form.save()
+            login(request, user)
+            messages.success(
+                request, f'You have signed up as {user.username}.'
+            )
+            return redirect('home')
+
+        else:
+            messages.error(request, 'Something went wrong, please try again')
+    else:
+        form = NewUserForm()
+
+    template = 'signup.html'
+    context = {
+        'form': form
+    }
+
+    return render(request, template, context)
 
 
 def add_booking(request):

@@ -6,6 +6,8 @@ urlpatterns = [
     path('', views.Home.as_view(), name='home'),
     path('about_us/', views.AboutUs.as_view(), name='about_us'),
     path('menu/', views.Menu.as_view(), name='menu'),
+    path('signup/', views.signUp, name='signup'),
+
 
 
     # BOOKING
