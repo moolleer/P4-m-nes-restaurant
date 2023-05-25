@@ -5,6 +5,7 @@ body {
 
 .btn {
   background-color: #6d0000 !important;
+  border: 2px solid #510000;
   color: white;
 }
 
@@ -77,4 +78,27 @@ body {
 
 .page-break {
   border-top: 2px #510000 solid;
+}
+
+/**/
+
+
+
+.signup {
+  text-align: center;
+  color: #510000;
+  font-weight: bold;
+  padding: 20px 0;
+  border-radius: 1%;
+  border: 2px solid #510000;
+  margin-top: 1em;
+  background-color: #DF7C41;
+
+}
+
+.signup input {
+  width: 90%;
+  border: 2px solid #510000;
+  padding: 5px;
+  margin: 5px 0 10px 0;
 }
