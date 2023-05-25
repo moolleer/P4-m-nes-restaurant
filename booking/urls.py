@@ -6,8 +6,6 @@ urlpatterns = [
     path('', views.Home.as_view(), name='home'),
     path('about_us/', views.AboutUs.as_view(), name='about_us'),
     path('menu/', views.Menu.as_view(), name='menu'),
-    path('signup/', views.signUp, name='signup'),
-
 
 
     # BOOKING
@@ -16,5 +14,4 @@ urlpatterns = [
     path('delete_a_booking/', views.DeleteBooking.as_view(), name='delete_a_booking'),
     path('delete_booking/<booking_id>', views.delete_booking, name='delete_booking'),
     path('edit_booking/<booking_id>', views.edit_booking, name='edit_booking'),
-
 ]

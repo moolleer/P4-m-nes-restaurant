@@ -2,6 +2,7 @@ from django.shortcuts import render, reverse, redirect, get_object_or_404
 from django.views import generic, View
 from django.http import HttpResponse, HttpResponseRedirect
 from django.contrib import messages
+from django.contrib.auth.decorators import login_required
 from .models import Booking, Table
 from .forms import BookingForm
 
@@ -35,31 +36,7 @@ class ShowMyBookings(generic.ListView):
         return Booking.objects.filter(booked_by=self.request.user)
 
 
-def signUp(request):
-    if request.method == 'POST':
-        form = NewUserForm(request.POST)
-
-        if form.is_valid():
-            user = form.save()
-            login(request, user)
-            messages.success(
-                request, f'You have signed up as {user.username}.'
-            )
-            return redirect('home')
-
-        else:
-            messages.error(request, 'Something went wrong, please try again')
-    else:
-        form = NewUserForm()
-
-    template = 'signup.html'
-    context = {
-        'form': form
-    }
-
-    return render(request, template, context)
-
-
+@login_required()
 def add_booking(request):
     """
     Allows a user to make a booking, and checks
@@ -73,29 +50,21 @@ def add_booking(request):
         if form.is_valid():
             booking_date = form.cleaned_data['date']
             booking_time = form.cleaned_data['time']
-            existing_booking = Booking.objects.filter(
-                    date=booking_date, time=booking_time)
 
             booking = form.save(commit=False)
             booking.booked_by = request.user
 
-            if booking.booked_by == request.user:
-                # Prevent a user for doing more than one booking/day
-                # if existing_booking.exists():
-                #     messages.error(
-                #         request, 'This booking already exists. Please change time or day.')
+            # Check if any available tables
+            if booking.assign_table():
+                booking.save()
+                messages.success(request, 'Booking completed')
+                return redirect(reverse('my_bookings'))
 
-                # Check if any available tables
-                if booking.assign_table():
-                    booking.save()
-                    messages.success(request, 'Booking completed')
-                    return redirect(reverse('my_bookings'))
-
-                else:
-                    messages.error(
-                        request,
-                        'No more available tables for this day and time.'
-                    )
+            else:
+                messages.error(
+                    request,
+                    'No more available tables for this day and time.'
+                )
         else:
             messages.error(
                 request, 'An error occurred, please try again')
@@ -110,6 +79,7 @@ def add_booking(request):
     return render(request, template, context)
 
 
+@login_required()
 def delete_booking(request, booking_id):
     """
     Users can choose to delete a booking. The delete booking
@@ -133,9 +103,13 @@ def delete_booking(request, booking_id):
     return render(request, template, context)
 
 
+@login_required()
 def edit_booking(request, booking_id):
     """
-    Users can edit their bookings time and date,
+    Users can edit their bookings time, date,
+    and number of persons. Initializes the form
+    with the form data and the existing booking instance,
+    checks if the form is valid and if so save it.
 
     """
     booking = get_object_or_404(Booking, booking_id=booking_id)

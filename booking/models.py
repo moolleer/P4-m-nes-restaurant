@@ -31,8 +31,14 @@ class Booking(models.Model):
         return f'Booking {self.date}, {self.time} by {self.booked_by}'
 
     def assign_table(self):
+        """
+        Retrives available tables for the bookings date and time,
+        excludes the tables that have a booking on the same date
+        and time as the requested booking, and orders the tables
+        based on the maximum number of guests in ascending order.
+        Then returns true if there is a table available.
+        """
         if self.date and self.time:
-            # Retrieve available tables for the booking's date and time
             available_tables = Table.objects.filter(
                 max_no_guests__gte=self.no_of_guests
             ).exclude(

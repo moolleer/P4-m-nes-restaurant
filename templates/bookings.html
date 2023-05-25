@@ -13,11 +13,9 @@
     <div class="row justify-content-center">
         <div class="col-12 col-md-9 col-lg-6 mb-3">
 
-
             <p>If you are a group bigger than 6 persons, please contact us for booking. </p>
 
             <form class="form" method="POST" action="{% url 'bookings' %}">
-
                 {% csrf_token %}
                 {{ form.as_p }}
                 <input class="btn" type="submit" value="Book Now">
@@ -26,7 +24,6 @@
             <p>To make a booking please <a href="{% url 'account_signup' %}"><strong>Sign up</strong></a> or<a
                     href="{% url 'account_login' %}">
                     <strong>Log in</strong></a> to your account.</p>
-
             {% endif %}
         </div>
     </div>

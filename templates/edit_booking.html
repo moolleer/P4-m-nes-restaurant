@@ -7,8 +7,8 @@
     <br>
     <p>If you are a group bigger than 6 persons, please contact us for booking. </p>
 
-    <form method="POST"  >
-        
+    <form method="POST">
+
         {% csrf_token %}
         {{ form.as_p }}
         <input class="btn" type="submit" value="Edit Booking">
@@ -16,7 +16,5 @@
 
     </form>
 </section>
-
-
 
 {%endblock%}

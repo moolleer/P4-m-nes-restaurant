@@ -3,23 +3,23 @@
 {% block content %}
 
 <div class="container">
-    <h2>My Bookings</h2>
-    <br>
-    <div class="row">
-      {% for booking in booking_list %}
-        <div class="col-md-4">
-          <div class="card mb-4">
-            <div class="card-body">
-              <h5 class="card-title">Booking:</h5>
-              <p class="card-text">Date: {{ booking.date }}</p>
-              <p class="card-text">Time: {{ booking.time }}</p>
-              <p class="card-text">Persons: {{ booking.no_of_guests }}</p>
-              <a href="{% url 'edit_booking' booking.booking_id %}" class="btn btn-my-bookings">Edit Booking</a>
-              <a href="{% url 'delete_booking' booking.booking_id %}" class="btn btn-my-bookings">Delete Booking</a>
-            </div>
-          </div>
+  <h2 class="text-center">My Bookings</h2>
+  <br>
+  <div class="row">
+    {% for booking in booking_list %}
+    <div class="col-md-4">
+      <div class="card mb-4">
+        <div class="card-body">
+          <h5 class="card-title">Booking:</h5>
+          <p class="card-text">Date: {{ booking.date }}</p>
+          <p class="card-text">Time: {{ booking.time }}</p>
+          <p class="card-text">Persons: {{ booking.no_of_guests }}</p>
+          <a href="{% url 'edit_booking' booking.booking_id %}" class="btn btn-my-bookings">Edit Booking</a>
+          <a href="{% url 'delete_booking' booking.booking_id %}" class="btn btn-my-bookings">Delete Booking</a>
         </div>
-      {% endfor %}
+      </div>
     </div>
+    {% endfor %}
+  </div>
 
-{%endblock%}
+  {%endblock%}
