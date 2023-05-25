@@ -52,10 +52,3 @@ class Booking(models.Model):
             # If its a new booking, assign a table
             self.assign_table()
         super().save(*args, **kwargs)
-
-
-# class User(models.Model):
-#     username = models.CharField(null=False)
-#     email = models.EmailField(null=False)
-#     password = models.CharField()
-#     password2 = models.CharField()

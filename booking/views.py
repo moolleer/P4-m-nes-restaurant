@@ -93,7 +93,9 @@ def add_booking(request):
 
                 else:
                     messages.error(
-                        request, 'No more available tables for this day and time.')
+                        request,
+                        'No more available tables for this day and time.'
+                    )
         else:
             messages.error(
                 request, 'An error occurred, please try again')

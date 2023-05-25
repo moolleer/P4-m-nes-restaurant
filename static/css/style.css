@@ -27,7 +27,6 @@ h4 {
 
 /* Hero Image*/
 
-
 .hero-content {
   padding: 0px;
 }
@@ -36,7 +35,7 @@ h4 {
   top: 60%;
   left: 50%;
   transform: translate(-50%, -50%);
-  
+
   text-align: center;
   color: white;
 }
@@ -44,6 +43,7 @@ h4 {
 .hero-image {
   position: relative;
 }
+
 .opaque-overlay {
   position: absolute;
   top: 0;
@@ -92,11 +92,7 @@ h4 {
   width: 60%;
 }
 
-
-
-/**/
-
-
+/* Forms*/
 
 .form {
   text-align: center;
@@ -106,8 +102,6 @@ h4 {
   border-radius: 1%;
   border: 2px solid #510000;
   margin-top: 10px;
-  
-
 }
 
 .fields input {
@@ -121,4 +115,25 @@ h4 {
 
 .menu-item p {
   font-style: italic;
+}
+
+/* Footer */
+
+#footer {
+  background-color: #de7a22;
+}
+
+.col-footer {
+  color: white;
+  text-align: center;
+  padding: 4px;
+  padding-top: 6px;
+}
+
+footer ul {
+  list-style: none;
+}
+
+footer a {
+  color: white;
 }
