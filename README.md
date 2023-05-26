@@ -169,11 +169,57 @@ The color palette for the website was generated from [My Color](https://github.c
 
 ### Existing Features
 
-A customized logo was created using the free logo generator,[Hatchful](https://github.com/moolleer/P4-m-nes-restaurant/blob/main/docs/testing.md), by Shopify.
+## Header 
 
+- A customized logo was created using the free logo generator,[Hatchful](https://github.com/moolleer/P4-m-nes-restaurant/blob/main/docs/testing.md), by Shopify.
+- The logo is positioned at the top left of the navigation bar. The logo is linked to the home page so the user can easily navigate the site.
+
+## Navigation bar
+
+- The navigation bar is present at the top of every page and includes all links to the other pages.
+- When a user is logged in Signup disapears and My Accounts is visible instead.
+- The navigation bar is fully responsive and collapses into a hamburger menu icon on smaller screen sizes. collapsing into a hamburger menu when the screen size becomes too small. When the hamburger is clicked, the menu options open on the left-hand side just under the page logo.
+- Hovering over the links will change the color to a darker brown and a underline affect appears.
+
+## Footer
+
+- Contains the contact details to the restaurant.
+- Links to the home top of page and booking. 
+
+## Home Page
+
+- The hero image gives the user a sense of what food the restaurant serves.
+
+## About Page
+
+- Gives the user some words from the restaurant.
+
+## User Accounts Pages
+
+Django allauth was installed and used to create the Sign up, Log In and Log Out functionality and pages.
+
+- Signup - A user can sign up and create an account for making bookings.
+- Log In - A user can log in to a created account.
+- Log Out - A user can log out from the account and no longer be able to book a table, or manage bookings.
+- Menu - Show the user the menu
+
+![menu](docs/readme_images/menu.png)
+- My Bookings - Displays the users bookings
+
+![bookings](docs/readme_images/my_bookings.png)
+
+- Edit booking - A user can edit their booking.
+- Delete booking - A user can delete their booking permanently.
+
+- About us - Tells the user some info from the restaurant.
 
 
 ### Future Features
+
+- It should not be possible to cretae a booking before the actual day at the booking time.
+- Customize user login/logout templates.
+- Create Error pages
+- It should be possible for a user to delete their account.
 
 ## Testing
 

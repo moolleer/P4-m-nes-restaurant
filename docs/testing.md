@@ -176,5 +176,14 @@ All pages
 
 ## Bugs
 
+### Assign table to a booking
+
+When a booking was made a table did not get assigned to the booking. Tutor support helped me figure out that the problem was in the function the references were booking__date and booking__time, instead of table__date and table__time. As table is a foreign key that links to the Table model
+
+### Unsolved Bugs
+
+- The effect on the navigation links in the hamburger navigation appears in the center instead of under the text.
+
+
 
 
