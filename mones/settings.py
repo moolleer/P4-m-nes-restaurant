@@ -29,13 +29,15 @@ TEMPLATES_DIR = os.path.join(BASE_DIR, 'templates')
 SECRET_KEY = os.environ.get('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
-DEBUG = True
+DEBUG = False
 
 ALLOWED_HOSTS = [
     '8000-moolleer-p4mnesrestaura-jlg4chxkwcm.ws-eu97.gitpod.io',
     'mones-restaurant.herokuapp.com',
     'localhost',
 ]
+
+X_FRAME_OPTIONS = 'SAMEORIGIN'
 
 
 # Application definition
